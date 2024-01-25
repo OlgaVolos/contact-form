@@ -7,6 +7,8 @@ import emailjs from '@emailjs/browser';
 import {publicKey, serviceID, templateId} from "../../constants";
 import {contactFormValidator} from "../../validators";
 
+import './contactForm.scss'
+
 
 const ContactForm = () => {
     const {
@@ -42,21 +44,41 @@ const ContactForm = () => {
         }
     }
     return (
-        <div>
+        <div className="contact-form__container">
+            <div className="contact-form__title">Contact Form with EmailJs</div>
             <form onSubmit={handleSubmit(submit)}>
-                <div><label>Ім'я: <input type="text" {...register('user_name')}/></label></div>
-                {errors.user_name && <span style={{color: "red"}}>{errors.user_name.message}</span>}
-                <div><label>Email: <input type="text" {...register('user_email')}/></label></div>
-                {errors.user_email && <span style={{color: "red"}}>{errors.user_email.message}</span>}
-                <div><label>Phone: <input type="text" {...register('user_phone')} placeholder="+380123456789"/></label>
-                </div>
-                {errors.user_phone && <span style={{color: "red"}}>{errors.user_phone.message}</span>}
-                <div><textarea {...register('message')} placeholder="Your message" rows="5" cols="35"></textarea>
-                </div>
-                {errors.message && <span style={{color: "red"}}>{errors.message.message}</span>}
-                <br/>
-                <button>Send</button>
+                <div className="contact-form__input_block">
+                    <div className="contact-form--input_wrapper">
+                        <div className="contact-form__text">Name:</div>
+                        <input className="contact-form--input" type="text" placeholder="Enter your name"  {...register('user_name')}/>
+                    {errors.user_name && <span className="contact-form--input__error">{errors.user_name.message}</span>}
+                    </div>
 
+                    <div className="contact-form--input_wrapper">
+                        <div className="contact-form__text">Email:</div>
+                        <input className="contact-form--input" type="text"
+                               placeholder="Enter your email"  {...register('user_email')}/>
+                        {errors.user_email && <span className="contact-form--input__error">{errors.user_email.message}</span>}
+                    </div>
+
+                    <div className="contact-form--input_wrapper">
+                        <div className="contact-form__text">Phone:</div>
+                        <input className="contact-form--input" type="text"  {...register('user_phone')}
+                               placeholder="+380123456789"/>
+                        {errors.user_phone && <span className="contact-form--input__error">{errors.user_phone.message}</span>}
+                    </div>
+                </div>
+
+                <div className="contact-form--input_wrapper" >
+                    <textarea className="contact-form--textarea" {...register('message')} placeholder="Your message" rows="5"></textarea>
+                    {errors.message && <span className="contact-form--input__error">{errors.message.message}</span>}
+                </div>
+
+                <br/>
+
+                <div className="contact-form--btn__wrapper">
+                    <button className="contact-form--btn">Send</button>
+                </div>
             </form>
         </div>
     );
