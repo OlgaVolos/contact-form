@@ -12,9 +12,11 @@ const contactFormValidator = Joi.object({
         'string.empty': "Enter your phone",
         'string.pattern.base': "Enter your phone"
     }),
-    message: Joi.string().min(5).required().messages({
+    message: Joi.string().min(5).max(300).messages({
         'string.empty': "Enter your message",
-        'string.min': "Enter your message"
+        'string.min': "Enter your message",
+        'string.max': "Message too long!",
+
     })
 })
 
